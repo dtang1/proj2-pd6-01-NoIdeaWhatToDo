@@ -1,0 +1,13 @@
+A game similar to The Price is Right for Stuyvesant High School's Software Development Course. The app will pick a random object and display it as the user will have to guess what the price of the object is. Users will also have the option to purchase the object displayed to them.
+
+Etsy:
+APP NAME Pricify
+KEYSTRING sj5fo4b3gtjiw3um4yffgleb
+SHARED SECRET y0p26ljqcz
+SERVICE		PUBLIC RATE LIMITS	OAUTH RATE LIMITS (PER USER)	STATUS
+Production API	5 per sec.5,000 per day	Disabled			Personal Access
+
+Amazon:
+Associates ID is pricify-20
+Access Key ID: AKIAIXPVITY5C2X37VIQ
+Secret Access Key: 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
