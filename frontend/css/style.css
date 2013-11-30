@@ -1,10 +1,29 @@
+@font-face {
+	font-family: "OratorStd";
+	src: url("fonts/OratorStd.otf"),
+		 url("fonts/OratorStd.ttf");
+}
 
 body {
-	
+	font-family:"OratorStd";
 }
-body * {
-	
+* {
+	margin:0;
+	padding:0;
 }
 
+#outer {
+	width:100%;
+	text-align:center;
+}
+
+#container {
+	display:inline-block;
+	width:1000px;
+}
+
+h1 {
+	
+}
 
 
