@@ -1,11 +1,11 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
 {% block content %}
-    <h3>{{message}}</h3>
-	<ul>
-		{% for post in posts %}
-			<li>
-				<a href="/post/{{ post.title }}">{{ post.title }}</a>
-			</li>
-		{% endfor %}
-	</ul>
+        <ul>
+            <h2>Leaderboards</h2>
+                {% for user in leaders %}
+                        <li>
+                                <b>Username:</b> {{user.username}} <b>Winnings:</b> ${{user.prize}}
+                        </li>
+                {% endfor %}
+        </ul>
 {% endblock %}

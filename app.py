@@ -27,10 +27,16 @@ facebook = oauth.remote_app('facebook',
 app = Flask(__name__)
 app.secret_key = conf.SECRET_KEY
 
+#renders home.html, which includes the option to sign in and displays a leaderboard
 @app.route("/")
 def home():
+<<<<<<< HEAD
         return render_template("home.html")
+=======
+        return render_template("home.html", leaders = utils.getusers())
+>>>>>>> Derek
 
+#allows user to create a username to play under. user is allowed to play under the same username multiple times. also option to play under facebook account
 @app.route("/register", methods = ["GET", "POST"])
 def register():
         if request.method == "GET":
@@ -72,12 +78,20 @@ def facebook_authorized(resp):
 
     return redirect(next_url)
 
+<<<<<<< HEAD
+=======
+#logs user out of session
+>>>>>>> Derek
 @app.route("/logout")
 def logout():
     pop_login_session()
     session.pop("username")
     return redirect(url_for('home'))
 
+<<<<<<< HEAD
+=======
+#initiates random api search to find an object. Declares item as global var and then redirects to actual game
+>>>>>>> Derek
 @app.route("/start")
 def start():
     global gnum
@@ -89,12 +103,21 @@ def start():
     
     return redirect(url_for('game'))
 
+<<<<<<< HEAD
+=======
+#This is the link to the game. uses global var from /start to display various aides to user for help in guessing price
+#Guesses limited to 6 per round. There are 7 rounds in total. Uses while loop to allow for multiple guesses in a given round
+>>>>>>> Derek
 @app.route("/game", methods = ["GET", "POST"])
 def game():
     global gnum
     global randitem
     round = utils.getround(session['username'])
+<<<<<<< HEAD
     if round > 9:
+=======
+    if round > 7:
+>>>>>>> Derek
         return redirect(url_for('gameend'))
     itemname = etsy.getTitle(randitem)
     imageurl = etsy.getImage(randitem)
@@ -113,12 +136,23 @@ def game():
             break
         elif (guess > price):
             gnum = gnum + 1
+<<<<<<< HEAD
             return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = str(gnum) + "Your previous guess was too high! Enter your guess for the price of this item to see if the Price Is Right!")
         else:
             gnum = gnum + 1
             return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = str(gnum) +  "Your previous guess was too low! Enter your guess for the price of this item to see if the Price Is Right!")
     return redirect(url_for('endround'))
 
+=======
+            return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "This is guess number " + str(gnum) + ". Your previous guess was too high! Enter your guess for the price of this item to see if the Price Is Right!")
+        else:
+            gnum = gnum + 1
+            return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "This is guess number " + str(gnum) + ". Your previous guess was too low! Enter your guess for the price of this item to see if the Price Is Right!")
+    return redirect(url_for('endround'))
+
+#the round ends and user is given link to website where they can purchase the previously shown item.
+#if the user guessed the item's price correctly, the prize is stored in the prize db and total winnings are kept track of
+>>>>>>> Derek
 @app.route("/endround")
 def endround():
     global gnum
@@ -136,6 +170,13 @@ def endround():
     utils.addRound(session['username'])
     return render_template("endround.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, price = price, link = url)
 
+<<<<<<< HEAD
+=======
+#displays user's prizes and winnings after game is complete
+@app.route("/gameend")
+def gameend():
+    return render_template("gameend.html", prizes = utils.getPrizes(session['username']), prizemoney = utils.getprize(session['username']))
+>>>>>>> Derek
 
 def error():
         error = session["error"]

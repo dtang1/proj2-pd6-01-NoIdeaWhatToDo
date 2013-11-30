@@ -1,9 +1,7 @@
 ﻿{% block content %}
 <h1>Round {{round}}</h1>
-<h2>
-    Guess The Price. If the Price is close to the retail price, you win the prize(not really).
-    The item is {{itemname}}
-</h2>
+<h2>Guess The Price. If the Price is close to the retail price, you win the prize(not really).</h2>
+<h2>The item is {{itemname}}</h2>
 <img src={{url}} alt="some_text">
 <h2>Description: {{itemdescription}}</h2>
 <form class="changeForm" action=" {{ url_for('game')}} " method="post">

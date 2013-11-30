@@ -1,0 +1,12 @@
+﻿{% block content %}
+<h1>Round {{round}} is now over.</h1>
+<h2>
+    Your item was {{itemname}}
+</h2>
+<img src={{url}} alt="some_text">
+<h2>Description: {{itemdescription}}</h2>
+<h2>The item's actual price is ${{price}}.</h2>
+<a href="{{link}}" target = "_blank"><span class="s1">Purchase item here.</target></span></a><br />
+<a href="start"><span class="s1">Continue to next round here</a>
+{% endblock %}
+
