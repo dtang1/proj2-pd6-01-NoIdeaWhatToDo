@@ -78,30 +78,63 @@ def logout():
     session.pop("username")
     return redirect(url_for('home'))
 
+@app.route("/start")
+def start():
+    global gnum
+    #if (gnum > 0):
+    #    redirect(url_for('game'))
+    gnum = 1
+    global randitem
+    randitem = etsy.getItem()
+    
+    return redirect(url_for('game'))
+
 @app.route("/game", methods = ["GET", "POST"])
 def game():
-    randitem = etsy.getItem()
+    global gnum
+    global randitem
     round = utils.getround(session['username'])
+    if round > 9:
+        return redirect(url_for('gameend'))
     itemname = etsy.getTitle(randitem)
-    url = etsy.getImage(randitem)
+    imageurl = etsy.getImage(randitem)
     itemdescription = etsy.getDescrip(randitem)
     price = etsy.getPrice(randitem)
-    gnum = 1
     if request.method == "GET":
-        return render_template("game.html", round = round, itemname = itemname, url = url, itemdescription = itemdescription, message = "Enter your guess for the price of this item to see if the Price Is Right!")
+        return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "Enter your guess for the price of this item to see if the Price Is Right!")
     elif utils.loggedIn():
         user = session["username"]
     else:
         return redirect("home")
     while gnum < 6:
         guess = request.form["price"]
-        if (guess > price):
+        if (abs(float(guess) - float(price)) < (float(price) / 10)):
+            utils.addPrize(session['username'],itemname,float(price),etsy.getUrl(randitem))
+            break
+        elif (guess > price):
             gnum = gnum + 1
-            return render_template("game.html", round = round, itemname = itemname, url = url, itemdescription = itemdescription, message = str(gnum) + "Your previous guess was too high! Enter your guess for the price of this item to see if the Price Is Right!")
+            return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = str(gnum) + "Your previous guess was too high! Enter your guess for the price of this item to see if the Price Is Right!")
         else:
             gnum = gnum + 1
-            return render_template("game.html", round = round, itemname = itemname, url = url, itemdescription = itemdescription, message = str(gnum) +  "Your previous guess was too low! Enter your guess for the price of this item to see if the Price Is Right!")
+            return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = str(gnum) +  "Your previous guess was too low! Enter your guess for the price of this item to see if the Price Is Right!")
+    return redirect(url_for('endround'))
 
+@app.route("/endround")
+def endround():
+    global gnum
+    global randitem
+    round = utils.getround(session['username'])
+    itemname = etsy.getTitle(randitem)
+    imageurl = etsy.getImage(randitem)
+    itemdescription = etsy.getDescrip(randitem)
+    price = etsy.getPrice(randitem)
+    url = etsy.getUrl(randitem)
+    #if gnum > 0 and gnum < 7:
+    #    return redirect(url_for('game'))
+    #else:
+    gnum = 0
+    utils.addRound(session['username'])
+    return render_template("endround.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, price = price, link = url)
 
 
 def error():
