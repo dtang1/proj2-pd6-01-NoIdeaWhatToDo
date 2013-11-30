@@ -1,0 +1,48 @@
+@font-face {
+	font-family: "OratorStd";
+	src: url("fonts/OratorStd.otf"),
+		 url("fonts/OratorStd.ttf");
+}
+
+body {
+	font-family:"OratorStd";
+}
+* {
+	margin:0;
+	padding:0;
+}
+
+#outer {
+	width:100%;
+	text-align:center;
+}
+
+#container {
+	display:inline-block;
+	width:1000px;
+}
+
+h1 {
+	padding:10px;
+	background:#9cf;
+	padding-bottom:15px;
+	margin-top:15px;
+}
+
+img {
+	margin-top:15px;
+	display:inline-block;
+}
+
+input {
+	display:inline-block;
+	margin-top:15px;
+}
+#sub {
+	font-family:"OratorStd";
+	padding:5px;
+	font-size:18px;
+}
+
+
+
