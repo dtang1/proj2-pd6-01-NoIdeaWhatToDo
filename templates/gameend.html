@@ -1,0 +1,13 @@
+﻿{% block content %}
+<h1>The Game is now over</h1>
+<h2>Your Prizes(that you'll have to buy on your own. Sorry)</h2>
+        <ul>
+                {% for prize in prizes %}
+                        <li>
+                                <a href="{{prize.url}}">{{prize.prize}}</a> Cost: ${{prize.price}}
+                        </li>
+                {% endfor %}
+        </ul>
+<h2>Totals winnings amount to ${{prizemoney}}</h2>
+<a href="logout"><span class="s1">You can return home and start a new game here</a>
+{% endblock %}
