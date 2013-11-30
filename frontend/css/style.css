@@ -38,5 +38,11 @@ input {
 	display:inline-block;
 	margin-top:15px;
 }
+#sub {
+	font-family:"OratorStd";
+	padding:5px;
+	font-size:18px;
+}
+
 
 
