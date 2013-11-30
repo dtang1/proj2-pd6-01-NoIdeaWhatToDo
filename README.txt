@@ -1,13 +1,17 @@
 proj2-pd6-01-NoIdeaWhatToDo
 ===========================
-
-Darth Vader
 Period 6 Group 1
 ===========================
 Tyrone Ye (Leader)
 Derek Tang
 Helen Lin
 Roger Li
+
+===========================
+Installation
+---------------------------
+Flask-OAuth
+Pymongo
 
 ===========================
 Project: The Price is Right
@@ -19,16 +23,12 @@ Project: The Price is Right
 5. See a showcase about this special item.
 6. The player aims to win all.
 
-
-*Requires installation of Flask-OAuth
-
----------------------------
+===========================
 APIs
 ---------------------------
 Amazon
 Etsy
-Google Shopping
-Google Images
+Edmunds
 
 
 
