@@ -23,6 +23,9 @@ def addPrize(username, prizename, price, url):
     prizes.insert({'username' : username, 'prize' : prizename, 'price' : price, 'url' : url})
     users.update({'username':username},{'$set':{'prize':getprize(username) + price}})
 
+def addRound(username):
+    users.update({'username':username},{'$set':{'round':getround(username) + 1}})
+
 def getround(username):
     user = users.find_one({'username':username})
     return user['round']
