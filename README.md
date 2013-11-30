@@ -20,7 +20,7 @@ Project: The Price is Right
 6. The player aims to win all.
 
 
-
+*Requires installation of Flask-OAuth
 
 ---------------------------
 APIs

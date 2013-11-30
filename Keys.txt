@@ -11,3 +11,11 @@ Amazon:
 Associates ID is pricify-20
 Access Key ID: AKIAIXPVITY5C2X37VIQ
 Secret Access Key: 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
+
+Edmunds:
+API KEY: 7bvg7mx4qwms54fgkgrdyxv7
+Shared secret: pyEAk5HkfKYPQVtgUqPJJjgr
+
+Facebook:
+App ID:	1423888951173454
+App Secret:465eb41ada435a758eca69a16b47c8e2

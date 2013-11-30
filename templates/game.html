@@ -1,0 +1,19 @@
+﻿{% block content %}
+<h1>Round {{round}}</h1>
+<h2>
+    Guess The Price. If the Price is close to the retail price, you win the prize(not really).
+    The item is {{itemname}}
+</h2>
+<img src={{url}} alt="some_text">
+<h2>Description: {{itemdescription}}</h2>
+<form class="changeForm" action=" {{ url_for('game')}} " method="post">
+    <h3>{{message}}</h3>
+    <input type="text" name="price" size="20" placeholder="Your price"/><br>
+
+	<div class="formButtons">
+		<input type="submit" name="login">
+		<button class="cancel" type="button">Cancel</button>
+	</div>
+</form>
+{% endblock %}
+

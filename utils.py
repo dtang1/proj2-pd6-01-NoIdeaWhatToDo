@@ -11,7 +11,7 @@ db = client.NIWTD
 users = db.users
 prizes = db.prizes
 
-def register(username, round):
+def register(username):
 	if users.find_one({"username" : username}) is None:
 		users.insert({ "username" : username, "round" : 0, "prize" : 0})
 		return True
@@ -22,6 +22,9 @@ def register(username, round):
 def addPrize(username, prizename, price, url):
     prizes.insert({'username' : username, 'prize' : prizename, 'price' : price, 'url' : url})
     users.update({'username':username},{'$set':{'prize':getprize(username) + price}})
+
+def addRound(username):
+    users.update({'username':username},{'$set':{'round':getround(username) + 1}})
 
 def getround(username):
     user = users.find_one({'username':username})
