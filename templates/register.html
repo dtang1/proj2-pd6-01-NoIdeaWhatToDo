@@ -1,0 +1,11 @@
+{% block content %}
+<form class="credentialForm" id="registerForm" action=" {{ url_for('register')}} " method="post">
+	<input type="text" name="username" size="20" placeholder="Username"/><br>
+	
+	<div class="formButtons">
+		<input type="submit" name="login">
+		<button class="cancel" type="button">Cancel</button>
+	</div>
+</form>
+<a href="/facebook_login"><span class="s1">Login with Facebook</span></a>
+{% endblock %}

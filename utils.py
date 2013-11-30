@@ -11,7 +11,7 @@ db = client.NIWTD
 users = db.users
 prizes = db.prizes
 
-def register(username, round):
+def register(username):
 	if users.find_one({"username" : username}) is None:
 		users.insert({ "username" : username, "round" : 0, "prize" : 0})
 		return True
