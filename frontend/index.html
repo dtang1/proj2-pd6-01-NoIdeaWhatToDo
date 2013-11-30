@@ -6,26 +6,24 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script src="js/vendor/jmin.js"></script>
+		<script src="js/main.js"></script>
 	</head>
 	<body>
+		
 		<div id="outer">
-    	<div id="container">
-			<h1>The Price is Right!</h1>
-			
-			<!-- Image Link -->
-			<img src="http://static.ddmcdn.com/gif/custom-cars-1.jpg" /><br>
-			
-			$<input name="price" id="price" value="100" />
-			<script>
-				// code that removes non digits from the price input
-				$(function() {
-					$("#price").on("input", function() {
-						$(this).val($(this).val().replace(/\D/g,""));
-					});
-				});
-			</script>
-			
-		</div>
+			<div id="container">
+				
+				<h1>The Price is Right!</h1>
+				
+				<!-- Image Link -->
+				<img src="http://static.ddmcdn.com/gif/custom-cars-1.jpg" /><br />
+				
+				<form action="/" method="POST">
+					$<input name="price" id="price" value="100" /><br />
+					<input />
+				</form>
+				
+			</div>
 		</div>
 		
 	</body>
