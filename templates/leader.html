@@ -1,0 +1,10 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+        <ul>
+                {% for user in leaders %}
+                        <li>
+                                <b>Username:</b> {{user.username}} <b>Winnings:</b> {{user.prize}}
+                        </li>
+                {% endfor %}
+        </ul>
+{% endblock %}

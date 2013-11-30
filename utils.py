@@ -6,14 +6,14 @@ import config as conf
 
 
 client = pymongo.MongoClient(conf.db)
-db = client.NIWTD
+db = client.TPIS
 
 users = db.users
 prizes = db.prizes
 
-def register(username):
+def register(username, url):
 	if users.find_one({"username" : username, "done" : False}) is None:
-		users.insert({ "username" : username, "done": False, "round" : 1, "prize" : 0})
+		users.insert({ "username" : username, "done": False, "round" : 1, "prize" : 0, "fb" : url})
 		return True
 	else:
 		app.session["error"] = "userExists"
@@ -21,7 +21,7 @@ def register(username):
 
 #returns users that have completed game in order
 def getusers():
-    return users.find({'done' : True}).sort(u'prize', -1)
+    return users.find({'done' : True}).sort(u'prize', -1).limit(20)
 
 #adds prize to user
 def addPrize(username, prizename, price, url):
@@ -50,9 +50,13 @@ def done(username):
 #returns all of users prizes and then removes them from database
 def getPrizes(username):
     temp = prizes.find({'username':username})
-    prizes.remove({'username':username})
     done(username)
     return temp
+
+def clearPrizes(username):
+    prizes.remove({'username':"Derek Tang"})
+    users.remove({'username':"DerekTang"})
+    #users.update({'username':username, "done" :False},{'$set':{'prize':0}})
 
 def loggedIn():
 	if "username" in app.session:

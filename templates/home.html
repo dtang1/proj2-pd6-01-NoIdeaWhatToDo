@@ -1,10 +1,14 @@
 ﻿{% extends "layout.html" %}
 {% block content %}
         <ul>
-            <h2>Leaderboards</h2>
+            <h2>Leaderboards-Top 20</h2>
                 {% for user in leaders %}
                         <li>
-                                <b>Username:</b> {{user.username}} <b>Winnings:</b> ${{user.prize}}
+                            {% if ("none" in user.fb)%}
+                                <b>Username:</b><u>{{user.username}}</u> <b>Winnings:</b> ${{user.prize}}
+                            {% else %}
+                                <b>Username:</b><a href ="https://facebook.com/{{user.fb}}"target = "_blank">{{user.username}}</a> <b>Winnings:</b> ${{user.prize}}
+                            {% endif %}
                         </li>
                 {% endfor %}
         </ul>
