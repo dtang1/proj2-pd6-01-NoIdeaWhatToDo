@@ -6,8 +6,11 @@ def url():
     tmp = urllib2.urlopen('http://api.edmunds.com/api/vehicle/v2/makes?fmt=json&state=new&api_key=7bvg7mx4qwms54fgkgrdyxv7')
     return tmp
 
+def url2(url):
+    tmp = urllib2.urlopen(url)
+    return tmp
 
-def getIntermediate():
+def getItem():
     f = url()
     json_string = f.read()
     parsed_json = json.loads(json_string)
@@ -15,29 +18,16 @@ def getIntermediate():
     length = len(stuff)
     item = stuff[random.randrange(0,length)]
     temp = [item['name'],item['niceName']]
-    length = len(item)
-    item = item['models'][random.randrange(0,length)]
-    temp = temp + [item['niceName'], item['name'], item['years'][0]['year']]
     f.close()
     f = urllib2.urlopen('http://api.edmunds.com/api/vehicle/v2/%s/models?fmt=json&state=new&api_key=7bvg7mx4qwms54fgkgrdyxv7'%temp[1])
     json_string = f.read()
     parsed_json = json.loads(json_string)
+    length = parsed_json['modelsCount']
     stuff = parsed_json['models']
-    a = 0
-    while a < parsed_json['modelsCount']:
-        scan = stuff[a]['niceName']
-        if scan == temp[2]:
-            scan = stuff[a]
-            break
-    return temp + [scan]
+    stuff = stuff[random.randrange(0, length)]
+    temp = temp + [stuff['niceName'], stuff['name'], stuff['years'][0]['year'], stuff['years'][0]['styles'][0]['id']]
+    return temp
 
-def getStyle(thing):
-     return thing[0:-1] + [thing[5]['years'][0]['styles'][0]['id']]
-
-def getItem():
-     c = getIntermediate()
-     c = getStyle(c)
-     return c
 
 def getTitle(item):
     return str(item[4]) + " " + item[0] + " " + item[3]
@@ -46,7 +36,13 @@ def getId(item):
     return item[5]
 
 def getPrice(item):
-    f = urllib2.urlopen('http://api.edmunds.com/v1/api/tco/newtotalcashpricebystyleidandzip/%s/10282?fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5])
+    url = 'http://api.edmunds.com/v1/api/tco/newtotalcashpricebystyleidandzip/%s/10282?fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5]
+    url = urllib2.Request(url)
+    try:
+     f = urllib2.urlopen(url)
+    except urllib2.HTTPError, e:
+        return "0"
+    #f = url2(url)
     json_string = f.read()
     parsed_json = json.loads(json_string)
     stuff = parsed_json['value']
@@ -56,12 +52,19 @@ def getDescrip(item):
     return ""
 
 def getUrl(item):
-    return "www.edmunds.com/%s/%s/%s/"%(item[1],item[2],item[4])
+    return "http://www.edmunds.com/%s/%s/%s/"%(item[1],item[2],item[4])
 
 def getImage(item):
-    f = urllib2.urlopen('http://api.edmunds.com/v1/api/vehiclephoto/service/findphotosbystyleid?styleId=%s&fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5])
+    url = 'http://api.edmunds.com/v1/api/vehiclephoto/service/findphotosbystyleid?styleId=%s&fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5]
+    url = urllib2.Request(url)
+    try:
+        f = urllib2.urlopen(url)
+    except urllib2.HTTPError, e:
+        return ""
+    #f = urllib2.urlopen(url)
     json_string = f.read()
     parsed_json = json.loads(json_string)
     stuff = parsed_json[0]['photoSrcs'][0]
     image = 'http://media.ed.edmunds-media.com/' + stuff
     return image
+
