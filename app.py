@@ -7,8 +7,10 @@ from flask_oauth import OAuth
 import config as conf
 import utils
 import datetime
+import random
 import etsy
 import edmunds
+import api
 
 FACEBOOK_APP_ID = '1423888951173454'
 FACEBOOK_APP_SECRET = '465eb41ada435a758eca69a16b47c8e2'
@@ -92,12 +94,12 @@ def logout():
 @app.route("/start")
 def start():
     global gnum
-    #if (gnum > 0):
-    #    redirect(url_for('game'))
     gnum = 1
     global randitem
-    randitem = etsy.getItem()
-    
+    if(random.randrange(0,7) < 6):
+        randitem = etsy.getItem()
+    else:
+        randitem = edmunds.getItem()
     return redirect(url_for('game'))
 
 #This is the link to the game. uses global var from /start to display various aides to user for help in guessing price
@@ -106,23 +108,25 @@ def start():
 def game():
     global gnum
     global randitem
+    global price
+    global imageurl
     round = utils.getround(session['username'])
-    if round > 3:
+    if round >= 6:
         return redirect(url_for('gameend'))
-    itemname = etsy.getTitle(randitem)
-    imageurl = etsy.getImage(randitem)
-    itemdescription = etsy.getDescrip(randitem)
-    price = etsy.getPrice(randitem)
+    itemname = api.getTitle(randitem)
+    imageurl = api.getImage(randitem)
+    itemdescription = api.getDescrip(randitem)
+    price = api.getPrice(randitem)
     if request.method == "GET":
         return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "Enter your guess for the price of this item to see if the Price Is Right!")
     elif utils.loggedIn():
         user = session["username"]
     else:
         return redirect("home")
-    while gnum < 6:
+    while gnum <= 6:
         guess = request.form["price"]
         if (abs(float(guess) - float(price)) < (float(price) / 10)):
-            utils.addPrize(session['username'],itemname,float(price),etsy.getUrl(randitem))
+            utils.addPrize(session['username'],itemname,float(price),api.getUrl(randitem))
             break
         elif (float(guess) > float(price)):
             gnum = gnum + 1
@@ -138,12 +142,14 @@ def game():
 def endround():
     global gnum
     global randitem
+    global price
+    global imageurl
     round = utils.getround(session['username'])
-    itemname = etsy.getTitle(randitem)
-    imageurl = etsy.getImage(randitem)
-    itemdescription = etsy.getDescrip(randitem)
-    price = etsy.getPrice(randitem)
-    url = etsy.getUrl(randitem)
+    itemname = api.getTitle(randitem)
+    #imageurl = api.getImage(randitem)
+    itemdescription = api.getDescrip(randitem)
+    #price = api.getPrice(randitem)
+    url = api.getUrl(randitem)
     #if gnum > 0 and gnum < 7:
     #    return redirect(url_for('game'))
     #else:
