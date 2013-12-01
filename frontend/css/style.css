@@ -44,5 +44,18 @@ input {
 	font-size:18px;
 }
 
+.guess.wrong {
+	color:#f00;
+}
+.guess.correct {
+	color:#0f0;
+}
+.answer {
+	color:#00f;
+}
+
+
+
+
 
 
