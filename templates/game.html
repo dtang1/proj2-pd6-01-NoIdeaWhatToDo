@@ -1,4 +1,8 @@
-﻿{% block content %}
+{% block content %}
+{% if ("" in url)%}
+    <a href="/game">Click to show image if missing. Will be fixed soon</a>
+{% endif %}
+
 <h1>Round {{round}}</h1>
 <h2>Guess The Price. If the Price is close to the retail price, you win the prize(not really).</h2>
 <h2>The item is {{itemname}}</h2>
