@@ -7,7 +7,7 @@
                             {% if ("none" in user.fb)%}
                                 <b>Username:</b><u>{{user.username}}</u> <b>Winnings:</b> ${{user.prize}}
                             {% else %}
-                                <b>Username:</b><a href ="https://facebook.com/{{user.fb}}"target = "_blank">{{user.username}}</a> <b>Winnings:</b> ${{user.prize}}
+                                <b>Username:</b><a href ="https://facebook.com/{{user.fb}}">{{user.username}}</a> <b>Winnings:</b> ${{user.prize}}
                             {% endif %}
                         </li>
                 {% endfor %}

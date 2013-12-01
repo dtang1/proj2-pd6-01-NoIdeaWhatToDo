@@ -54,9 +54,8 @@ def getPrizes(username):
     return temp
 
 def clearPrizes(username):
-    prizes.remove({'username':"Derek Tang"})
-    users.remove({'username':"DerekTang"})
-    #users.update({'username':username, "done" :False},{'$set':{'prize':0}})
+    prizes.remove({'username':username})
+    users.update({'username':username, "done" :False},{'$set':{'prize':0}})
 
 def loggedIn():
 	if "username" in app.session:

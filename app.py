@@ -8,6 +8,7 @@ import config as conf
 import utils
 import datetime
 import etsy
+import edmunds
 
 FACEBOOK_APP_ID = '1423888951173454'
 FACEBOOK_APP_SECRET = '465eb41ada435a758eca69a16b47c8e2'
@@ -123,7 +124,7 @@ def game():
         if (abs(float(guess) - float(price)) < (float(price) / 10)):
             utils.addPrize(session['username'],itemname,float(price),etsy.getUrl(randitem))
             break
-        elif (guess > price):
+        elif (float(guess) > float(price)):
             gnum = gnum + 1
             return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "This is guess number " + str(gnum) + ". Your previous guess was too high! Enter your guess for the price of this item to see if the Price Is Right!")
         else:
