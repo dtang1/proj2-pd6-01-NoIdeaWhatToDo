@@ -29,6 +29,26 @@ h1 {
 	margin-top:15px;
 }
 
+h2 {
+	
+}
+
+#won {
+	width:100%;
+	text-align:right;
+	margin-top:15px;
+	margin-bottom:10px;
+}
+#won a {
+	width:500px;
+	display:inline-block;
+	text-decoration:none;
+	color:#666;
+}
+#won a:hover {
+	color:#00f;
+}
+
 img {
 	margin-top:15px;
 	display:inline-block;
@@ -43,6 +63,25 @@ input {
 	padding:5px;
 	font-size:18px;
 }
+
+p.des {
+	margin-top:10px;
+	width:500px;
+	display:inline-block;
+}
+
+.guess.wrong {
+	color:#f00;
+}
+.guess.correct {
+	color:#0f0;
+}
+.answer {
+	color:#00f;
+}
+
+
+
 
 
 
