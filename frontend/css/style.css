@@ -44,6 +44,12 @@ input {
 	font-size:18px;
 }
 
+p.des {
+	margin-top:10px;
+	width:500px;
+	display:inline-block;
+}
+
 .guess.wrong {
 	color:#f00;
 }
