@@ -46,7 +46,7 @@ def getId(item):
     return item[5]
 
 def getPrice(item):
-    f = urllib2.urlopen('http://api.edmunds.com/v1/api/tco/usedtotalcashpricebystyleidandzip/%s/10282?fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5])
+    f = urllib2.urlopen('http://api.edmunds.com/v1/api/tco/newtotalcashpricebystyleidandzip/%s/10282?fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5])
     json_string = f.read()
     parsed_json = json.loads(json_string)
     stuff = parsed_json['value']
@@ -65,4 +65,3 @@ def getImage(item):
     stuff = parsed_json[0]['photosSrcs'][0]
     image = 'http://media.ed.edmunds-media.com/' + stuff
     return image
-
