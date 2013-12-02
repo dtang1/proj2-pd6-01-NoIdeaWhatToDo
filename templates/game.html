@@ -1,21 +1,66 @@
-{% block content %}
-{% if ("" in url)%}
-    <a href="/game">Click to show image if missing. Will be fixed soon</a>
-{% endif %}
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta name="description" content="website description" />
+		<meta name="keywords" content="HTML Javascript CSS JQuery Web Technology Website" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../frontend/css/style.css" />
+        <script src="../frontend/js/vendor/jmin.js"></script>
+        <script src="../frontend/js/main.js"></script>
+	</head>
+	<body>
+		
+		<div id="outer">
+			<div id="container">
+				
+				<h1>The Price is Right!</h1>
+				
+				<div id="won">
+					<div id="menu">
+						<a href="/">Home</a>
+					{% if ("username" in session) or ('logged_in' in session)%}
+						<a href="/start">New Game/Continue Game</a>
+						<a href="/logout">Logout</a>
+					{% else %}
+                        <a href="/register">Select A Username</a>
+                    {% endif %}
 
-<h1>Round {{round}}</h1>
-<h2>Guess The Price. If the Price is close to the retail price, you win the prize(not really).</h2>
-<h2>The item is {{itemname}}</h2>
-<img src={{url}} alt="some_text">
-<h2>Description: {{itemdescription}}</h2>
-<form class="changeForm" action=" {{ url_for('game')}} " method="post">
-    <h3>{{message}}</h3>
-    <input type="text" name="price" size="20" placeholder="Your price"/><br>
+			        </div>
+				</div>
+				
+				<h2>Round {{round}}</h2>
+                <h3>Guess The Price. If the Price is close to the retail price, you win the prize(not really).</h3>
+                <h3>The item is {{itemname}}</h3>
+                <img src={{url}} alt="some_text"  width="480" height="360">
+                <h3>Description: {{itemdescription}}</h3>
+                                
+                <form action="" method="POST">
+                    $<input name="price" id="price" value="" /><br />
+                    <input type="submit" id="sub" value="Guess!" />
+                </form>
+				
+			</div>
+		</div>
+		
+	</body>
+</html>
 
-	<div class="formButtons">
-		<input type="submit" name="login">
-		<button class="cancel" type="button">Cancel</button>
-	</div>
-</form>
-{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

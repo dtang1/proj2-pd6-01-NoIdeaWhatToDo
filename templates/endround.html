@@ -1,12 +1,64 @@
-﻿{% block content %}
-<h1>Round {{round}} is now over.</h1>
-<h2>
-    Your item was {{itemname}}
-</h2>
-<img src={{url}} alt="some_text">
-<h2>Description: {{itemdescription}}</h2>
-<h2>The item's actual price is ${{price}}.</h2>
-<a href="{{link}}" target = "_blank"><span class="s1">Purchase item here.</target></span></a><br />
-<a href="start"><span class="s1">Continue to next round here</a>
-{% endblock %}
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta name="description" content="website description" />
+		<meta name="keywords" content="HTML Javascript CSS JQuery Web Technology Website" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../frontend/css/style.css" />
+        <script src="../frontend/js/vendor/jmin.js"></script>
+        <script src="../frontend/js/main.js"></script>
+	</head>
+	<body>
+		
+		<div id="outer">
+			<div id="container">
+				
+				<h1>The Price is Right!</h1>
+				
+				<div id="won">
+					<div id="menu">
+						<a href="/">Home</a>
+					{% if ("username" in session) or ('logged_in' in session)%}
+						<a href="/start">New Game/Continue Game</a>
+						<a href="/logout">Logout</a>
+					{% else %}
+                        <a href="/register">Select A Username</a>
+                    {% endif %}
+
+			        </div>
+				</div>
+				
+				<h2>Round {{round}} is now over.</h2>
+                <h3>Your item was {{itemname}}</h3>
+                <img src={{url}} alt="some_text"  width="480" height="360">
+                <h3>Description: {{itemdescription}}</h3>
+                                
+                <h2>The item's actual price is ${{price}}.</h2>
+                <a href="{{link}}" target = "_blank"><span class="s1">Purchase item here.</target></span></a><br />
+                <a href="start"><span class="s1">Continue to next round here</a>
+				
+			</div>
+		</div>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

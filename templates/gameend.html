@@ -1,13 +1,67 @@
-﻿{% block content %}
-<h1>The Game is now over</h1>
-<h2>Your Prizes(that you'll have to buy on your own. Sorry)</h2>
-        <ul>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta name="description" content="website description" />
+		<meta name="keywords" content="HTML Javascript CSS JQuery Web Technology Website" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../frontend/css/style.css" />
+        <script src="../frontend/js/vendor/jmin.js"></script>
+        <script src="../frontend/js/main.js"></script>
+	</head>
+	<body>
+		
+		<div id="outer">
+			<div id="container">
+				
+				<h1>The Price is Right!</h1>
+				
+				<div id="won">
+					<div id="menu">
+						<a href="/">Home</a>
+					{% if ("username" in session) or ('logged_in' in session)%}
+						<a href="/start">New Game/Continue Game</a>
+						<a href="/logout">Logout</a>
+					{% else %}
+                        <a href="/register">Select A Username</a>
+                    {% endif %}
+
+			        </div>
+				</div>
+				
+				<h2>The Game is now over</h2>
+                <h3>Your Prizes(that you'll have to buy on your own. Sorry)</h3>
+                <ul>
                 {% for prize in prizes %}
                         <li>
                                 <a href="{{prize.url}}">{{prize.prize}}</a> Cost: ${{prize.price}}
                         </li>
                 {% endfor %}
-        </ul>
-<h2>Totals winnings amount to ${{prizemoney}}</h2>
-<a href="logout"><span class="s1">You can return home and start a new game here</a>
-{% endblock %}
+                </ul>
+                <h2>Totals winnings amount to ${{prizemoney}}</h2>
+                <a href="logout"><span class="s1">You can return home and start a new game here</a>
+				
+			</div>
+		</div>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

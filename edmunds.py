@@ -49,7 +49,7 @@ def getPrice(item):
     return stuff
 
 def getDescrip(item):
-    return ""
+    return "It goes Vroom Vroom. Unless this car is electric. If thats the case, then it goes buzz buzz."
 
 def getUrl(item):
     return "http://www.edmunds.com/%s/%s/%s/"%(item[1],item[2],item[4])
