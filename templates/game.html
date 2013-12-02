@@ -31,8 +31,12 @@
 				<h2>Round {{round}}</h2>
                 <h3>Guess The Price. If the Price is close to the retail price, you win the prize(not really).</h3>
                 <h3>The item is {{itemname}}</h3>
-                <img src={{url}} alt="some_text"  width="480" height="360">
+                <img src={{url}} alt="some_text"  width="480" height="360"><br />
+                {% if ("" in url)%}
+                    <a href="/game">Click to show image if missing. Will be fixed soon</a>
+                {% endif %}
                 <h3>Description: {{itemdescription}}</h3>
+                <h3>{{message}}</h3>
                                 
                 <form action="" method="POST">
                     $<input name="price" id="price" value="" /><br />

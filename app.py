@@ -85,6 +85,8 @@ def facebook_authorized(resp):
 #logs user out of session
 @app.route("/logout")
 def logout():
+    if not utils.loggedIn():
+        return redirect(url_for('home'))
     pop_login_session()
     utils.clearPrizes(session['username'])
     session.pop("username")
@@ -106,6 +108,8 @@ def start():
 #Guesses limited to 6 per round. There are 7 rounds in total. Uses while loop to allow for multiple guesses in a given round
 @app.route("/game", methods = ["GET", "POST"])
 def game():
+    if not utils.loggedIn():
+        return redirect(url_for('home'))
     global gnum
     global randitem
     global price
@@ -129,11 +133,15 @@ def game():
         return redirect("home")
     while gnum <= 6:
         guess = request.form["price"]
-        if (abs(float(guess) - float(price)) < (float(price) / 10)):
+        try: 
+            guess = float(guess)
+        except:
+            return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "Your previous guess was invalid. Please guess again.")
+        if (abs(guess - float(price)) < (float(price) / 10)):
             utils.addPrize(session['username'],itemname,float(price),api.getUrl(randitem))
             gnum = 7
             break
-        elif (float(guess) > float(price)):
+        elif (guess > float(price)):
             gnum = gnum + 1
             if gnum == 7:
                 break
@@ -149,6 +157,8 @@ def game():
 #if the user guessed the item's price correctly, the prize is stored in the prize db and total winnings are kept track of
 @app.route("/endround")
 def endround():
+    if not utils.loggedIn():
+        return redirect(url_for('home'))
     global gnum
     global randitem
     global price
@@ -169,6 +179,8 @@ def endround():
 #displays user's prizes and winnings after game is complete
 @app.route("/gameend")
 def gameend():
+    if not utils.loggedIn():
+        return redirect(url_for('home'))
     return render_template("gameend.html", prizes = utils.getPrizes(session['username']), prizemoney = utils.getprize(session['username']))
 
 def error():
