@@ -33,7 +33,7 @@ app.secret_key = conf.SECRET_KEY
 #renders home.html, which includes the option to sign in and displays a leaderboard
 @app.route("/")
 def home():
-        return render_template("index.html", leaders = utils.getusers())
+        return render_template("home.html", leaders = utils.getusers())
 
 #allows user to create a username to play under. user is allowed to play under the same username multiple times. also option to play under facebook account
 @app.route("/register", methods = ["GET", "POST"])

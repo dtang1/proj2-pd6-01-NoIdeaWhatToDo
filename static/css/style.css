@@ -1,0 +1,87 @@
+@font-face {
+	font-family: "OratorStd";
+	src: url("fonts/OratorStd.otf"),
+		 url("fonts/OratorStd.ttf");
+}
+
+body {
+	font-family:"OratorStd";
+}
+* {
+	margin:0;
+	padding:0;
+}
+
+#outer {
+	width:100%;
+	text-align:center;
+}
+
+#container {
+	display:inline-block;
+	width:1000px;
+}
+
+h1 {
+	padding:10px;
+	background:#9cf;
+	padding-bottom:15px;
+	margin-top:15px;
+}
+
+h2 {
+	
+}
+
+#won {
+	width:100%;
+	text-align:right;
+	margin-top:15px;
+	margin-bottom:10px;
+}
+#won a {
+	width:500px;
+	display:inline-block;
+	text-decoration:none;
+	color:#666;
+}
+#won a:hover {
+	color:#00f;
+}
+
+img {
+	margin-top:15px;
+	display:inline-block;
+}
+
+input {
+	display:inline-block;
+	margin-top:15px;
+}
+#sub {
+	font-family:"OratorStd";
+	padding:5px;
+	font-size:18px;
+}
+
+p.des {
+	margin-top:10px;
+	width:500px;
+	display:inline-block;
+}
+
+.guess.wrong {
+	color:#f00;
+}
+.guess.correct {
+	color:#0f0;
+}
+.answer {
+	color:#00f;
+}
+
+
+
+
+
+

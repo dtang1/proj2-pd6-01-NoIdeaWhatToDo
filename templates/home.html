@@ -4,9 +4,9 @@
 		<meta name="description" content="website description" />
 		<meta name="keywords" content="HTML Javascript CSS JQuery Web Technology Website" />
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="../frontend/css/style.css" />
-        <script src="../frontend/js/vendor/jmin.js"></script>
-        <script src="../frontend/js/main.js"></script>
+		<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }}>
+        <script src={{ url_for('static', filename='js/vendor/jmin.js') }}></script>
+        <script src={{ url_for('static', filename='js/main.js') }}></script>
 	</head>
 	<body>
 		
@@ -29,15 +29,17 @@
 				</div>
                 <ul>
             <h2>Leaderboards-Top 20</h2>
+                    <ol>
                 {% for user in leaders %}
                         <li>
                             {% if ("none" in user.fb)%}
                                 <b>Username:</b><u>{{user.username}}</u> <b>Winnings:</b> ${{user.prize}}
                             {% else %}
-                                <b>Username:</b><a href ="https://facebook.com/{{user.fb}}"target = "_blank">{{user.username}}</a> <b>Winnings:</b> ${{user.prize}}
+                                <b>Username:</b><a href ="https://facebook.com/{{user.fb}}"target = "_blank">{{user.username}}</a> <b>Winnings:</b> ${{user.prize}}<b />
                             {% endif %}
                         </li>
                 {% endfor %}
+                    </ol>
         </ul>
 				
 			</div>
