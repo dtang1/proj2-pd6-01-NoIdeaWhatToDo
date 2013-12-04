@@ -98,6 +98,7 @@ def start():
     global gnum
     gnum = 1
     global randitem
+    #5-1 odds of a random item chosen from etsy rather than edmunds to be item for new round
     if(random.randrange(0,7) < 5):
         randitem = etsy.getItem()
     else:
@@ -114,29 +115,35 @@ def game():
     global randitem
     global price
     global imageurl
-    try:
-        randitem
-    except NameError:
-        redirect(url_for('start'))
+    #try:
+    #    randitem
+    #except NameError:
+    #    redirect(url_for('start'))
     round = utils.getround(session['username'])
+    #limit number of rounds to 6. redirects to gameend to finish game
     if round >= 6:
         return redirect(url_for('gameend'))
+    #obtain info from randitem chosen in /start
     itemname = api.getTitle(randitem)
     imageurl = api.getImage(randitem)
     itemdescription = api.getDescrip(randitem)
     price = api.getPrice(randitem)
+    #render game.html with item info and prompt
     if request.method == "GET":
         return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "Enter your guess for the price of this item to see if the Price Is Right!")
     elif utils.loggedIn():
         user = session["username"]
     else:
         return redirect("home")
+    #user given 6 guesses per round to correctly guess the price
     while gnum <= 6:
         guess = request.form["price"]
+        #looks for invalid inputs from user. Prompts user if so
         try: 
             guess = float(guess)
         except:
             return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "Your previous guess was invalid. Please guess again.")
+        #compares guess to actual price and prompts user if their guess is too high or low
         if (abs(guess - float(price)) < (float(price) / 10)):
             utils.addPrize(session['username'],itemname,float(price),api.getUrl(randitem))
             gnum = 7
@@ -169,6 +176,7 @@ def endround():
     itemdescription = api.getDescrip(randitem)
     #price = api.getPrice(randitem)
     url = api.getUrl(randitem)
+    #checks that all guesses for a round have to be completed before ending round
     if gnum > 0 and gnum < 7:
         return redirect(url_for('game'))
     #else:
