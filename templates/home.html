@@ -1,9 +1,8 @@
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<meta name="description" content="website description" />
-		<meta name="keywords" content="HTML Javascript CSS JQuery Web Technology Website" />
-		<title></title>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="The Price is Right Guessing Game Javascript HTML JQuery Python App Flask" />
+		<title>Home</title>
 		<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }}>
         <script src={{ url_for('static', filename='js/vendor/jmin.js') }}></script>
         <script src={{ url_for('static', filename='js/main.js') }}></script>
@@ -18,19 +17,18 @@
 				<div id="won">
 					<div id="menu">
 						<a href="/">Home</a>
-					{% if ("username" in session) or ('logged_in' in session)%}
-						<a href="/start">New Game/Continue Game</a>
-						<a href="/logout">Logout</a>
-					{% else %}
-                        <a href="/register">Select A Username</a>
-                    {% endif %}
-
+						{% if ("username" in session) or ('logged_in' in session)%}
+							<a href="start">New Game/Continue Game</a>
+							<a href="logout">Logout</a>
+						{% else %}
+                        	<a href="register">Select A Username</a>
+                    	{% endif %}
 			        </div>
 				</div>
                 <ul>
             <h2>Leaderboards-Top 20</h2>
                     <ol>
-                {% for user in leaders %}
+                		{% for user in leaders %}
                         <li>
                             {% if ("none" in user.fb)%}
                                 <b>Username:</b><u>{{user.username}}</u> <b>Winnings:</b> ${{user.prize}}
@@ -38,7 +36,7 @@
                                 <b>Username:</b><a href ="https://facebook.com/{{user.fb}}"target = "_blank">{{user.username}}</a> <b>Winnings:</b> ${{user.prize}}<b />
                             {% endif %}
                         </li>
-                {% endfor %}
+                		{% endfor %}
                     </ol>
         </ul>
 				

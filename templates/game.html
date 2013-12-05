@@ -3,7 +3,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<meta name="description" content="website description" />
 		<meta name="keywords" content="HTML Javascript CSS JQuery Web Technology Website" />
-		<title></title>
+		<title>The Price is Right!</title>
 		<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }}>
         <script src={{ url_for('static', filename='js/vendor/jmin.js') }}></script>
         <script src={{ url_for('static', filename='js/main.js') }}></script>
@@ -32,7 +32,7 @@
                 <h3>The item is: <u>{{itemname}}</u></h3>
                 <img src={{url}} alt="some_text"  width="480" height="360"><br />
                 {% if ("" in url)%}
-                    <a href="/game">Click to show image if missing. Will be fixed soon</a>
+                    <a href="game">Click to show image if missing. Will be fixed soon</a>
                 {% endif %}
                 <h3>Description: {{itemdescription}}</h3>
                 <br />
