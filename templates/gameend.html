@@ -9,6 +9,7 @@
         <script src={{ url_for('static', filename='js/main.js') }}></script>
 	</head>
 	<body>
+
 		
 		<div id="outer">
 			<div id="container">
@@ -38,6 +39,10 @@
                 	{% endfor %}
                 </ul>
                 <h2>Totals winnings amount to ${{prizemoney}}</h2>
+
+                <a href="https://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://softdev-server.stuycs.org&p[title]=The%20Price%20Is%20Right&p[summary]=I%20just%20won%20${{prizemoney}}%20worth%20of%20stuff.%20(not%20really)" target="_blank"> <img src= "http://www.crewsmostcorrupt.org/page/-/images/buttons/btn_fb_55px.gif" alt="" /></a>
+                
+                <br />
                 <a href="logout"><span class="s1">You can return home and start a new game here</span></a>
 				
 			</div>

@@ -89,6 +89,7 @@ def logout():
         return redirect(url_for('home'))
     pop_login_session()
     utils.clearPrizes(session['username'])
+    utils.clearUser(session['username'])
     session.pop("username")
     return redirect(url_for('home'))
 
@@ -115,10 +116,10 @@ def game():
     global randitem
     global price
     global imageurl
-    #try:
-    #    randitem
-    #except NameError:
-    #    redirect(url_for('start'))
+    try:
+        randitem
+    except NameError:
+        redirect(url_for('start'))
     round = utils.getround(session['username'])
     #limit number of rounds to 6. redirects to gameend to finish game
     if round >= 6:

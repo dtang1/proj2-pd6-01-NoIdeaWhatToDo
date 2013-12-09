@@ -57,6 +57,9 @@ def clearPrizes(username):
     prizes.remove({'username':username})
     users.update({'username':username, "done" :False},{'$set':{'prize':0}})
 
+def clearUser(username):
+    users.remove({'username':username, "done":False})
+
 def loggedIn():
 	if "username" in app.session:
 		return True
