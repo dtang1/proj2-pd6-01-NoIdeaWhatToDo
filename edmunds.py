@@ -49,7 +49,18 @@ def getPrice(item):
     return stuff
 
 def getDescrip(item):
-    return "It goes Vroom Vroom. Unless this car is electric. If thats the case, then it goes buzz buzz."
+    url = 'https://api.edmunds.com/api/vehiclereviews/v2/styles/%s?fmt=json&api_key=7bvg7mx4qwms54fgkgrdyxv7'%item[5]
+    url = urllib2.Request(url)
+    try:
+     f = urllib2.urlopen(url)
+    except urllib2.HTTPError, e:
+        return "(Owner Review) It goes Vroom Vroom. Unless this car is electric. If thats the case, then it goes buzz buzz."
+    #f = url2(url)
+    json_string = f.read()
+    parsed_json = json.loads(json_string)
+    parsed_json = parsed_json['reviews'][0]['text']
+    return ("(Owner Review) " + parsed_json)
+   
 
 def getUrl(item):
     return "http://www.edmunds.com/%s/%s/%s/"%(item[1],item[2],item[4])
