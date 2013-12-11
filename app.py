@@ -99,11 +99,25 @@ def start():
     global gnum
     gnum = 1
     global randitem
+    global price
+    global round
+    global itemname
+    global imageurl
+    global itemdescription
     #5-1 odds of a random item chosen from etsy rather than edmunds to be item for new round
     if(random.randrange(0,7) < 5):
         randitem = etsy.getItem()
     else:
         randitem = edmunds.getItem()
+    round = utils.getround(session['username'])
+    #limit number of rounds to 6. redirects to gameend to finish game
+    if round >= 6:
+        return redirect(url_for('gameend'))
+    #obtain info from randitem chosen in /start
+    itemname = api.getTitle(randitem)
+    imageurl = api.getImage(randitem)
+    itemdescription = api.getDescrip(randitem)
+    price = api.getPrice(randitem)
     return redirect(url_for('game'))
 
 #This is the link to the game. uses global var from /start to display various aides to user for help in guessing price
@@ -115,27 +129,15 @@ def game():
     global gnum
     global randitem
     global price
+    global round
+    global itemname
     global imageurl
-    try:
-        randitem
-    except NameError:
-        redirect(url_for('start'))
-    round = utils.getround(session['username'])
-    #limit number of rounds to 6. redirects to gameend to finish game
-    if round >= 6:
-        return redirect(url_for('gameend'))
-    #obtain info from randitem chosen in /start
-    itemname = api.getTitle(randitem)
-    imageurl = api.getImage(randitem)
-    itemdescription = api.getDescrip(randitem)
-    price = api.getPrice(randitem)
+    global itemdescription
+    
     #render game.html with item info and prompt
     if request.method == "GET":
         return render_template("game.html", round = round, itemname = itemname, url = imageurl, itemdescription = itemdescription, message = "Enter your guess for the price of this item to see if the Price Is Right!")
-    elif utils.loggedIn():
-        user = session["username"]
-    else:
-        return redirect("home")
+    
     #user given 6 guesses per round to correctly guess the price
     while gnum <= 6:
         guess = request.form["price"]
