@@ -12,6 +12,7 @@ import etsy
 import edmunds
 import api
 
+#Facebook authentification code from http://ryaneshea.com/facebook-authentication-for-flask-apps
 FACEBOOK_APP_ID = '1423888951173454'
 FACEBOOK_APP_SECRET = '465eb41ada435a758eca69a16b47c8e2'
 
